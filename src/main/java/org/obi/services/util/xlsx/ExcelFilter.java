@@ -10,25 +10,22 @@ import javax.swing.filechooser.FileFilter;
 import org.apache.commons.io.FilenameUtils;
 import org.obi.services.util.Util;
 
-
 /**
  * ExcelFilter class
+ *
+ * 
+ * see org.obi.services.util.xlsx.ExcelReader, org.obi.services.util.xlsx.ExcelWriter
+ * 
  *
  * @author r.hendrick
  */
 public class ExcelFilter extends FileFilter {
 
-    // /////////////////////////////////////////////////////////////////////////
-    //
-    //
-    // Container
-    // 
-    //
-    // /////////////////////////////////////////////////////////////////////////
     /**
      * Accept all directory and file xlsx
+     *
      * @param f the file concern
-     * @return 
+     * @return true if is a directoryand not file
      */
     @Override
     public boolean accept(File f) {
@@ -36,7 +33,6 @@ public class ExcelFilter extends FileFilter {
             return true;
         }
 
-        
         String extension = FilenameUtils.getExtension(f.getAbsolutePath());
         if (extension != null) {
             Util.out("Extension : " + extension);
@@ -46,17 +42,14 @@ public class ExcelFilter extends FileFilter {
         return false;
     }
 
-    //The description of this filter
+    /**
+     * Express static description of the filter
+     *
+     * @return only existing filter description "Excel XLSX"
+     */
     @Override
-        public String getDescription() {
+    public String getDescription() {
         return "Excel XLSX";
     }
-    // /////////////////////////////////////////////////////////////////////////
-    //
-    //
-    // Getter / Setter
-    // 
-    //
-    // /////////////////////////////////////////////////////////////////////////
 
 }
