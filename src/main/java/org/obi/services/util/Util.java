@@ -22,10 +22,10 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 
 /**
- * <h1>Util</h1>
+ * Util
  * <p>
  * This class coverts
- * </p>
+ * 
  *
  *
  * @author r.hendrick
@@ -37,10 +37,7 @@ public class Util {
      */
     public static final String ISLogFilenamePath = "OBILog.txt";
 
-    //
-    //
-    //
-    //
+   
     /**
      * Port utiliser lorsque un appareil n'a pas encore été découvert <br>
      * Valeur par défaut : 54321
@@ -52,9 +49,7 @@ public class Util {
      */
     public static final Integer portAdopted = 55555;
 
-    //
-    //
-    //
+    
     //
     public static final String keyPrefix = "0x";
     public static final String keyQuit = "0x0001";

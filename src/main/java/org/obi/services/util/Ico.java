@@ -7,7 +7,6 @@ package org.obi.services.util;
 
 import java.awt.Image;
 import java.net.URL;
-import javax.imageio.ImageIO;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 
