@@ -17,8 +17,8 @@ import java.util.Date;
 import java.util.Locale;
 
 /**
- * <h1>DateUtil</h1><br>
- * DateUtil class
+ * DateUtil
+ * 
  *
  * @author r.hendrick
  *
