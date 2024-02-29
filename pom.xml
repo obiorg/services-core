@@ -6,8 +6,9 @@
         <artifactId>OBI</artifactId>
         <version>0.0.0</version>
     </parent>
-    
-    <artifactId>services-core</artifactId>
+
+    <artifactId>obi-core</artifactId>
+
     <packaging>jar</packaging>
     
     
@@ -42,4 +43,5 @@
         <maven.compiler.target>17</maven.compiler.target>
         <exec.mainClass>org.obi.services.core.ServicesCore</exec.mainClass>
     </properties>
+    <name>obi-core</name>
 </project>
