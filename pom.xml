@@ -5,10 +5,13 @@
         <groupId>org.obi</groupId>
         <artifactId>OBI</artifactId>
         <version>0.0.0</version>
-        <relativePath>../../../pom.xml</relativePath>
     </parent>
+
     <artifactId>obi-core</artifactId>
+
     <packaging>jar</packaging>
+    
+    
     <dependencies>
         <dependency>
             <groupId>org.ini4j</groupId>
