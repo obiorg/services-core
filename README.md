@@ -22,7 +22,7 @@ Services-core implement connection to siemens PLC or other system
 6.1. Click sur dépendencies and download declared dependencies
 7. Construct the project by apply build (right click on project than build),
 8. Generate documentation by right click on project and select "Generate Javadoc"
-
+9. Go to Module OBI : right click and add existing module point to obi-core
 Project library obi-core is ready to use
 
 
