@@ -119,7 +119,7 @@ public class Settings {
     public static Object read(String section, String param) {
         String methodName = Settings.class.getName() + " : read(section, param, value) >> ";
         try {
-            Util.out(methodName + "Tentative de lecture de la section (" + section + ") paramètre " + param + "...");
+            //Util.out(methodName + "Tentative de lecture de la section (" + section + ") paramètre " + param + "...");
             File f = new File(iniFilename);
             if(!f.exists()){
                 Util.out(methodName + " fichier n'existe pas impossible récupérer les paramètres !");
