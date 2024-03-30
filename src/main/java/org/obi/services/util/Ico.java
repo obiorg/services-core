@@ -106,6 +106,14 @@ public class Ico {
         return load(path, obj).getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH);
     }
 
+    public static ImageIcon i08(String path) {
+        return new ImageIcon(load(path, 8, 8));
+    }
+
+    public static ImageIcon i08(String path, Object obj) {
+        return new ImageIcon(load(path, 8, 8, obj));
+    }
+    
     public static ImageIcon i16(String path) {
         return new ImageIcon(load(path, 16, 16));
     }
