@@ -24,9 +24,10 @@ public class Settings {
      * Specifiy the default init file name.
      */
     public static String iniFilename = "app";
-    public static String sectSRV = "server";
-    public static String sectSCREEN = "screen";
 
+    /**
+     * Section of configuration
+     */
     public static final String CONFIG = "CONFIG";
     public static final String COMPANY = "company";
     public static final String GMT = "gmt";
@@ -39,6 +40,20 @@ public class Settings {
     public static final String COUNTER = "COUNTER";
 
     public static final String LINK_LINK = "LINK";
+    
+    /**
+     * Specify max size of a log file
+     */
+    public static final String LOG_FILE_SIZE_MB = "logFileSizeMB";  
+    /**
+     * Specify max duration of storage in a directory of the backup log file
+     */
+    public static final String LOG_FILE_DURATION_J = "logFileDurationJ";
+    /**
+     * Specify the directory in which logs file are backup after duration saving
+     * @{link org.obi.services.util.Settings#LOG_FILE_SIZE_MB}
+     */
+    public static final String LOG_FILE_STORAGE_PATH = "logFileStoragePath";
 
     /**
      * Cette méthod permet de créer un fichier de préférence ini
@@ -105,8 +120,17 @@ public class Settings {
         String methodName = Settings.class.getName() + " : read(section, param, value) >> ";
         try {
             //Util.out(methodName + "Tentative de lecture de la section (" + section + ") paramètre " + param + "...");
-            Wini ini = new Wini(new File(iniFilename));
+            File f = new File(iniFilename);
+            if(!f.exists()){
+                Util.out(methodName + " fichier n'existe pas impossible récupérer les paramètres !");
+                return null;
+            }
+            Wini ini = new Wini(f);
             Object obj = ini.get(section, param);
+            if(obj == null){
+                Util.out(methodName + " Attention section " + section + " avec le paramètre " + param
+                + " n'existe pas ");
+            }
             //Util.out(methodName + "...Lecture réussie");
             return obj;
         } catch (IOException ex) {
@@ -168,9 +192,13 @@ public class Settings {
             ini.put(Settings.CONFIG, Settings.COMPANY, "11");
             ini.put(Settings.CONFIG, Settings.GMT, 3);
 
-            ini.put(Settings.CONFIG, Settings.URL_OBI, "jdbc:sqlserver://BLCSRV22002\\BLCSCADA:1433;databaseName=imoka");
+            ini.put(Settings.CONFIG, Settings.URL_OBI, "jdbc:sqlserver://INSTANCE\\BDD:1433;databaseName=imoka");
             ini.put(Settings.CONFIG, Settings.URL_DIMO, "jdbc:sqlserver:");
             ini.put(Settings.CONFIG, Settings.URL_ZEN, "jdbc:sqlserver:");
+            
+            ini.put(Settings.CONFIG, Settings.LOG_FILE_SIZE_MB, 1);
+            ini.put(Settings.CONFIG, Settings.LOG_FILE_DURATION_J, 7);
+            ini.put(Settings.CONFIG, Settings.LOG_FILE_STORAGE_PATH, "./logs");
 
             ini.store();
         } catch (IOException ex) {
@@ -205,5 +233,17 @@ public class Settings {
             return null;
         }
     }
+
+    public static int readInteger(String CONFIG_FILE_PATH, String log_file_size_limit, int DEFAULT_LOG_FILE_SIZE_LIMIT) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+//
+//    public static int readInteger(String CONFIG_FILE_PATH, String log_file_size_limit, int DEFAULT_LOG_FILE_SIZE_LIMIT) {
+//        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+//    }
+//
+//    public static int readInteger(String CONFIG_FILE_PATH, String log_file_size_limit, int DEFAULT_LOG_FILE_SIZE_LIMIT) {
+//        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+//    }
 
 }

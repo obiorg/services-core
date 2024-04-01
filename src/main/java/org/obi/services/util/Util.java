@@ -37,7 +37,6 @@ public class Util {
      */
     public static final String ISLogFilenamePath = "OBILog.txt";
 
-   
     /**
      * Port utiliser lorsque un appareil n'a pas encore été découvert <br>
      * Valeur par défaut : 54321
@@ -49,7 +48,6 @@ public class Util {
      */
     public static final Integer portAdopted = 55555;
 
-    
     //
     public static final String keyPrefix = "0x";
     public static final String keyQuit = "0x0001";
@@ -120,6 +118,45 @@ public class Util {
         }
         printOut.write(outMsg + "\n");
         printOut.close();
+
+        // Process to backup log and release to new
+        logStorage();
+    }
+
+    /**
+     *
+     * -	Nous souhaitons réduire la taille des fichiers d’enregistrement à 1MB -
+     * Ce paramètre (1 MB) doit être configurable au travers de l’interface
+     * (settingFrame) -	Ce paramètre doit être enregistré dans le fichier de
+     * configuration accompagnant l’application (OBI.ini ou obi_service.ini – je
+     * ne sais plus), NB : core dispose d’un outil simple permettant
+     * d’écrire/Lire des paramètres de configuration (voir comment cela est fait
+     * pour la société et le gmt ou encore les liaisons au base de donnée). -	Si
+     * ce paramètre est à zéro, il ne faut considérer aucun transfert de logs
+     *
+     * -	Un autre paramètre est définit permettant de déterminer la durée de
+     * sauvegarde des logs dans sous répertoire « logs », -	Ce paramètre par
+     * défaut à 7, doit être configurable au travers de l’interface
+     * (SettingFrame), -	Ce paramètre doit être enregistré dans le fiche de
+     * configuration accompagnant l’application -	Si ce paramètre est à zéro, il
+     * ne faut considérer aucune suppression des logs * NB : Ces paramètres qui
+     * précèdes sont obtenu à l’aide d’un spinner et doivent être configuré pour
+     * empêcher d’entrer des paramètre aberrant (valeur négative)
+     *
+     * -	Le processus se déroule comme suit : o	Analyse cyclique de la taille du
+     * log à chaque écriture dans celui=ci o Déplacement du fichier en cours
+     * dans un sous répertoire « logs » si condition ok, o Crée un nouveau
+     * fichier « obiLog » pour les nouveaux enregistrement, o	Poursuit en
+     * renommant le fichier déplacé en ajoutant le suffixe de date au format «
+     * _YYYYMMJJ_HHMM » Ex : obiLog_20240227_2132.txt o	Si un nouveau
+     * déplacement est opéré alors check de destruction d’historique de log en
+     * fonction des condition ci-dessus
+     *
+     *
+     * @return
+     */
+    public static int logStorage() {
+        return 0;
     }
 
     /**
@@ -272,6 +309,4 @@ public class Util {
         return obj;
     }
     
-    
-
 }

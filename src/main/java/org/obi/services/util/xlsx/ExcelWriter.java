@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.imoka.util.xlsx;
+package org.obi.services.util.xlsx;
 
 import java.io.File;
 import java.io.FileOutputStream;
