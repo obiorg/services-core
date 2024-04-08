@@ -40,17 +40,18 @@ public class Settings {
     public static final String COUNTER = "COUNTER";
 
     public static final String LINK_LINK = "LINK";
-    
+
     /**
      * Specify max size of a log file
      */
-    public static final String LOG_FILE_SIZE_MB = "logFileSizeMB";  
+    public static final String LOG_FILE_SIZE_MB = "logFileSizeMB";
     /**
      * Specify max duration of storage in a directory of the backup log file
      */
     public static final String LOG_FILE_DURATION_J = "logFileDurationJ";
     /**
      * Specify the directory in which logs file are backup after duration saving
+     *
      * @{link org.obi.services.util.Settings#LOG_FILE_SIZE_MB}
      */
     public static final String LOG_FILE_STORAGE_PATH = "logFileStoragePath";
@@ -63,18 +64,18 @@ public class Settings {
      * @return vrai si le fichier a été créé sinon faux
      */
     private static Boolean createIniFile(String filePathName) {
-        String methodName = Settings.class.getName() + " : createIniFile(String) >> ";
+        String methodName = Settings.class.getSimpleName() + " : createIniFile(String) >> ";
         try {
             File file = new File(filePathName);
             if (file.createNewFile()) {
-                Util.out(methodName + "Le fichier " + filePathName + " vient d'être créé !");
+                Util.out(Util.errLine() + methodName + "Le fichier " + filePathName + " vient d'être créé !");
                 return true;
             } else {
-                Util.out(methodName + "Le fichier " + filePathName + " existe déjà !");
+                Util.out(Util.errLine() + methodName + "Le fichier " + filePathName + " existe déjà !");
                 return false;
             }
         } catch (IOException e) {
-            Util.out(methodName + "Erreur suivante lors de la création du fichier : " + e.getMessage());
+            Util.out(Util.errLine() + methodName + "Erreur suivante lors de la création du fichier : " + e.getMessage());
             return false;
         }
     }
@@ -98,14 +99,14 @@ public class Settings {
      * @param value la valeur du paramètre
      */
     public static void write(String section, String param, Object value) {
-        String methodName = Settings.class.getName() + " : write(section, param, value) >> ";
+        String methodName = Settings.class.getSimpleName() + " : write(section, param, value) >> ";
         try {
-            Util.out(methodName + "Tentative d'écriture en section (" + section + ") paramètre " + param + " avec la valeur " + value);
+            Util.out(Util.errLine() + methodName + "Tentative d'écriture en section (" + section + ") paramètre " + param + " avec la valeur " + value);
             Wini ini = new Wini(new File(iniFilename));
             ini.put(section, param, value);
             ini.store();
         } catch (IOException ex) {
-            Util.out(methodName + "...Erreur suivante est survenue : " + ex.getMessage());
+            Util.out(Util.errLine() + methodName + "...Erreur suivante est survenue : " + ex.getMessage());
         }
     }
 
@@ -117,31 +118,31 @@ public class Settings {
      * @return renvoi de la valeur du paramètre spécifié
      */
     public static Object read(String section, String param) {
-        String methodName = Settings.class.getName() + " : read(section, param, value) >> ";
+        String methodName = Settings.class.getSimpleName() + " : read(section, param, value) >> ";
         try {
-            //Util.out(methodName + "Tentative de lecture de la section (" + section + ") paramètre " + param + "...");
+            //Util.out(Util.errLine() + methodName + "Tentative de lecture de la section (" + section + ") paramètre " + param + "...");
             File f = new File(iniFilename);
-            if(!f.exists()){
-                Util.out(methodName + " fichier n'existe pas impossible récupérer les paramètres !");
+            if (!f.exists()) {
+                Util.out(Util.errLine() + methodName + " fichier n'existe pas impossible récupérer les paramètres !");
                 return null;
             }
             Wini ini = new Wini(f);
             Object obj = ini.get(section, param);
-            if(obj == null){
-                Util.out(methodName + " Attention section " + section + " avec le paramètre " + param
-                + " n'existe pas ");
+            if (obj == null) {
+                Util.out(Util.errLine() + methodName + " Attention section " + section + " avec le paramètre " + param
+                        + " n'existe pas ");
             }
-            //Util.out(methodName + "...Lecture réussie");
+            //Util.out(Util.errLine() + methodName + "...Lecture réussie");
             return obj;
         } catch (IOException ex) {
-            System.err.println(methodName + "...Erreur suivante est survenue pour (" + section + ", " + param + ") : " + ex.getMessage());
-            Util.out(methodName + "...Erreur suivante est survenue pour (" + section + ", " + param + ") : " + ex.getMessage());
+            System.err.println(Util.errLine() + methodName + "...Erreur suivante est survenue pour (" + section + ", " + param + ") : " + ex.getMessage());
+            Util.out(Util.errLine() + methodName + "...Erreur suivante est survenue pour (" + section + ", " + param + ") : " + ex.getMessage());
             return null;
         }
     }
 
     public static Object[] readLink(Integer row) {
-        String methodName = Settings.class.getName() + " : read(section, param, value) >> ";
+        String methodName = Settings.class.getSimpleName() + " : read(section, param, value) >> ";
         try {
             Wini ini = new Wini(new File(iniFilename));
             ArrayList<Object> obj = new ArrayList<>();
@@ -159,7 +160,7 @@ public class Settings {
             obj.add(Boolean.valueOf(ini.get(Settings.LINK_LINK + "\\" + row, "state") == null ? "true" : ini.get(Settings.LINK_LINK + "\\" + row, "state")));
             return obj.toArray();
         } catch (IOException ex) {
-            Util.out(methodName + "...Erreur suivante est survenue pour lecture du lien ligne " + row + " : " + ex.getMessage());
+            Util.out(Util.errLine() + methodName + "...Erreur suivante est survenue pour lecture du lien ligne " + row + " : " + ex.getMessage());
             return null;
         }
     }
@@ -171,14 +172,14 @@ public class Settings {
      * @return true if the link is enable
      */
     public static Boolean readLinkState(Integer row) {
-        String methodName = Settings.class.getName() + " : read(section, param, value) >> ";
+        String methodName = Settings.class.getSimpleName() + " : read(section, param, value) >> ";
         try {
             Wini ini = new Wini(new File(iniFilename));
             String v = ini.get(Settings.LINK_LINK + "\\" + row, "state");
             Boolean r = Boolean.valueOf(v);
             return r;
         } catch (IOException ex) {
-            Util.out(methodName + "...Erreur suivante est survenue pour lecture du lien ligne " + row + " : " + ex.getMessage());
+            Util.out(Util.errLine() + methodName + "...Erreur suivante est survenue pour lecture du lien ligne " + row + " : " + ex.getMessage());
             return false;
         }
     }
@@ -195,55 +196,15 @@ public class Settings {
             ini.put(Settings.CONFIG, Settings.URL_OBI, "jdbc:sqlserver://INSTANCE\\BDD:1433;databaseName=imoka");
             ini.put(Settings.CONFIG, Settings.URL_DIMO, "jdbc:sqlserver:");
             ini.put(Settings.CONFIG, Settings.URL_ZEN, "jdbc:sqlserver:");
-            
+
             ini.put(Settings.CONFIG, Settings.LOG_FILE_SIZE_MB, 1);
             ini.put(Settings.CONFIG, Settings.LOG_FILE_DURATION_J, 7);
             ini.put(Settings.CONFIG, Settings.LOG_FILE_STORAGE_PATH, "./logs");
 
             ini.store();
         } catch (IOException ex) {
-            Logger.getLogger(Settings.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Settings.class.getSimpleName()).log(Level.SEVERE, null, ex);
         }
     }
-
-    /**
-     * Zenon table Data allow to read all the data name saved in configuration
-     *
-     * @return a list array of the zenon data table contains in configuration
-     */
-    public static ArrayList<String> zenTableData() {
-        String methodName = Settings.class.getName() + " : zenTableData() >> ";
-        ArrayList<String> list = new ArrayList<>();
-        try {
-            Util.out(methodName + "Tentative de lecture de la section zenTableData ...");
-            Wini ini = new Wini(new File(iniFilename));
-
-            // Clean previous table
-            Integer counter = Integer.valueOf(Settings.read(Settings.LINK_ZEN, Settings.COUNTER).toString());
-            for (int count = 0; count < counter; count++) {
-                String param = Settings.read(Settings.LINK_ZEN + "\\" + count, "param").toString();
-                String data = Settings.read(Settings.LINK_ZEN + "\\" + count, "data").toString();
-                list.add(param + " ==> " + data);
-            }
-
-            Util.out(methodName + "...Lecture réussie");
-            return list;
-        } catch (IOException ex) {
-            Util.out(methodName + "...Erreur suivante est survenue : " + ex.getMessage());
-            return null;
-        }
-    }
-
-    public static int readInteger(String CONFIG_FILE_PATH, String log_file_size_limit, int DEFAULT_LOG_FILE_SIZE_LIMIT) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-//
-//    public static int readInteger(String CONFIG_FILE_PATH, String log_file_size_limit, int DEFAULT_LOG_FILE_SIZE_LIMIT) {
-//        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-//    }
-//
-//    public static int readInteger(String CONFIG_FILE_PATH, String log_file_size_limit, int DEFAULT_LOG_FILE_SIZE_LIMIT) {
-//        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-//    }
 
 }
