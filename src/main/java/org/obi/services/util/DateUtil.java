@@ -371,7 +371,7 @@ public class DateUtil {
     public static String sqlDTof(LocalDateTime dt) {
         return ""
                 + dt.getYear() + "-"
-                + dt.getMonth() + "-"
+                + dt.getMonthValue() + "-"
                 + dt.getDayOfMonth() + " "
                 + dt.getHour() + ":"
                 + dt.getMinute() + ":"
@@ -392,7 +392,7 @@ public class DateUtil {
      */
     public static String sqlDTConvert(LocalDateTime dt) {
         return "CONVERT(datetime, '"
-                + sqlDTConvert(dt)
+                + sqlDTof(dt)
                 + "', 121)";
     }
 
