@@ -5,6 +5,7 @@
  */
 package org.obi.services.util;
 
+import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -398,6 +399,7 @@ public class DateUtil {
 
     /**
      * Return now from orderTimeZoneIndex
+     *
      * @param orderTimeZonesIndex index in order timeZone
      * @return actual LocalDateTime now
      */
@@ -589,5 +591,19 @@ public class DateUtil {
      */
     public static String localDTFFZoneId(Integer indexOrderTimeZone) {
         return localDateTimeFormattedFromZoneId(indexOrderTimeZone);
+    }
+
+    /**
+     * toLocalDateTime<p>
+     * Allow to convert a specify #{code Timestamp} to a LocalDateTime
+     *
+     * @param timestamp the timestamp to convert to local date time
+     * @return the timestamp converted to local date time
+     */
+    public static LocalDateTime toLocalDateTime(Timestamp timestamp) {
+        if (timestamp == null) {
+            timestamp = Timestamp.valueOf(LocalDateTime.now());
+        }
+        return timestamp.toLocalDateTime();
     }
 }
